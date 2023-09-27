@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "733864177789",
+    "project_id": "untitled-5c38f",
+    "storage_bucket": "untitled-5c38f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733864177789:android:34bd95c927628b96758114",
+        "android_client_info": {
+          "package_name": "com.example.ayurbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN7uA497F6pV5bzd2_egmBQKM62kIi5Xo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "phenopal2-psob",
+  "private_key_id": "465a16998c2b4741f7f0ab442abc804de45448b6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCbtsf6HPJCOFFr\nWAWLb/EWpuWkTaB5imir9rf/lOTQuisyVw0A+ipgQrQmofP2VzF46wXTGBX3WJio\nV4sxo7YyiUjuvQiArKR9+rX8X9Iw8PLi7xWgt2s0IGbdXGh2b2V0qGVWe/iTK5VQ\nq7YtaNx0f5+Sc338cdScD9Gb+eAsXObJE/HPz9s1gYGPOR3cl2yLSh8HVx0soKFs\nentETj7ZJ8wg0GqStdr1N9tDiM5G3pQmoSD0m+58JJV1StLeCZVfHu81HByXxJty\nmE8weqpIimjVXuLEO1N9zzjleCWlGlK+KdW7lGEdZvYoYl+83bBPICNEgECTrGMH\no9C0QL2PAgMBAAECggEARImJL8952ifLvoG5vwwAg8XmIhGA5r5DIB2yEy7IIA8x\nYDDsqldyO3hgrvht1ym9vslDgQyC7qHyX3ZY7/ptAYVnsp1Fls1mgYTOgUzzyVLk\ntXoifOD+sKzqWdiIqkiR0W0lXZGnca+nQyCxSP90uVpLNDzdYTYBLMfRrOOpBh0W\nBnDZqBlYswy5y2CTOVtRqioMNAs7G3FSy8hrpEaVz+8zZ2V+2u5128tiX29ax2Db\nWVGKNuCmbLx/RH5KDWIZjGjzuovxT4ByBcggmXOPiMed61yKY0FzIh8rfsygO633\neUH6YI34XfDngd84Hl2PReqMflkNGC8EtPbjDbckIQKBgQDRweX2cn4ufUgUNjVV\nLjHGbjAe29yEcuGs/Wsr3Hx+tkTxIthCdiiTq/fXcBxYVuVJP4b4Th7VO+bJ37fx\nm028a+YjrZLRMLlobY5lvgg/q41s3dRyU0HTMLpfSZAd0whVVqazYqKlv9ilFYET\nHNMlKOpDdkHAkJ3HTK1RwYZhKQKBgQC+CtQG5KrSrqCCIaIfCGZL6mloiSFA5Tpq\n79tKrZKUXJAT9mHjRoSA09gk0JYQPpJNz+VSqNd3mDeVOgs75GTrlRwlb0sjJtii\nqVyRTqCOZJ+iQK6dYnmKxu23SCnaoLmfezODcyg25vp8khn9twMFYGB8qsjqP8JU\nxKzoFyXn9wKBgQCv3caVjwFEsT3R1HF67bRGDvTBqs2FL10P0ZoduEuZYfEDzJdN\nggwbZD/0ncbmOlUbyOu9HKK1XffuomhzZicTJ9RZbZp/Uj7h05lkrKP13jxBXuxU\nvoGeNGjOo7r1ho6iHni+RqDgH63hG9qQz8Yojdl8npYagiYHh755oaytoQKBgCw/\nYyyTsz5IkHCcGh41m3PTiWVggFCWzqo1XI6fqUBH6Pfs5s+/DHzeVjYEJtxzZSce\n35sGWtyqoU5qbFEulVzQo/QHXKw7kDcXTck7UGC3BwAFJWLZmcj5FkIVWEFiKLX8\nPns9pcBauTml3s1W/ioTTYPZU9xOqhWIkWWcdiPzAoGBAKknsPmYNB8Rvkf5MmdZ\nTWhWvIgYg9XoEc0ErYahIYBoMeBUAadoC23aK9zgy6cNDtexQjm1SDA8ujXJF7Hc\nt5XibJqEY9IOlXjMBdsbmdX2AecU6PRZAPjtVUqOFFhuxhk2dOgqRLi5hK2dDE+V\n5LRZzxfuCtvZfb3pqhfAfZ/9\n-----END PRIVATE KEY-----\n",
+  "client_email": "hrd-280@phenopal2-psob.iam.gserviceaccount.com",
+  "client_id": "106509790402450299490",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/hrd-280%40phenopal2-psob.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
