@@ -1,10 +1,10 @@
 import 'dart:async';
 
+import 'package:ayurbot/screens/authFront.dart';
 import 'package:ayurbot/screens/homeScreen.dart';
 import 'package:ayurbot/screens/loginScreen.dart';
 import 'package:ayurbot/services/userAuth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,8 +22,11 @@ class _SplashScreenState extends State<SplashScreen> {
     Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              _currentUser != null ? HomeScreen() : LoginScreen(),
+          builder: (context) => _currentUser != null
+              ? HomeScreen()
+              : LoginScreen(
+                  onTap: () {},
+                ),
         ));
   }
 
@@ -38,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
           context,
           MaterialPageRoute(
             builder: (context) =>
-                _currentUser != null ? HomeScreen() : LoginScreen(),
+                _currentUser != null ? HomeScreen() : AuthFront(),
           ));
     });
   }

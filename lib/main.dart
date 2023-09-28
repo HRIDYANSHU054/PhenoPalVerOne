@@ -1,5 +1,4 @@
 import 'package:ayurbot/firebase_options.dart';
-import 'package:ayurbot/screens/loginScreen.dart';
 import 'package:ayurbot/screens/splash.dart';
 import 'package:ayurbot/services/userAuth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +19,7 @@ void main() async {
       // Override the canvasColor to be transparent
       canvasColor: Colors.transparent,
     ),
+    // home: SplashScreen(),
     home: SplashScreen(),
   ));
 }
