@@ -7,6 +7,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class ChatBotScreen extends StatefulWidget {
   const ChatBotScreen({super.key});
@@ -20,6 +23,10 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
   UserAuth _auth = UserAuth();
   TextEditingController _textCntrl = TextEditingController();
   bool showMessageLoader = true;
+
+  //speeach variables
+  bool micActivated = false;
+  late stt.SpeechToText _speech;
 
   List<ChatMessage> messages = [
     // ChatMessage(
@@ -71,6 +78,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     //initializing dialogFlow
     DialogFlowtter.fromFile().then((instance) => dialogFlow = instance);
 
+    //initialising speech to text
+    _speech = stt.SpeechToText();
+
     super.initState();
   }
 
@@ -95,6 +105,33 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
       print("response from Pheno is: ${resp.message!.text!.text}");
       addMessage(msg: resp.message!, sender: "gpt");
     });
+  }
+
+  //listening function
+  void _listen() async {
+    if (!micActivated) {
+      bool available = await _speech.initialize(
+        onStatus: (val) => print("$val"),
+        onError: (val) => print("$val"),
+      );
+      if (available) {
+        setState(() {
+          micActivated = true;
+        });
+        _speech.listen(
+          onResult: (result) => setState(() {
+            _textCntrl.text = result.recognizedWords;
+            _textCntrl.selection =
+                TextSelection.collapsed(offset: result.recognizedWords.length);
+          }),
+        );
+      }
+    } else {
+      setState(() {
+        micActivated = false;
+      });
+      _speech.stop();
+    }
   }
 
   @override
@@ -173,13 +210,33 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     return TextField(
       controller: _textCntrl,
       decoration: InputDecoration(
-        hintText: "Send a message...",
+        hintText: micActivated
+            ? AppLocalizations.of(context)!.listening
+            : AppLocalizations.of(context)!.send_a_message,
         hintStyle: TextStyle(
           color: Colors.green,
         ),
         filled: true,
         fillColor: Color.fromARGB(202, 16, 17, 16),
         border: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.transparent,
+          ),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(5),
+            bottom: Radius.circular(0),
+          ),
+        ),
+        disabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.transparent,
+          ),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(5),
+            bottom: Radius.circular(0),
+          ),
+        ),
+        enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             color: Colors.transparent,
           ),
@@ -197,23 +254,50 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
             bottom: Radius.circular(0),
           ),
         ),
-        suffixIcon: IconButton(
-          onPressed: () {
-            //adding user message o the list
-            sendMessage(msg: _textCntrl.text.trim());
-            _textCntrl.clear();
+        suffixIcon: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            //say message
+            ///////////////////
+            Container(
+              decoration: !micActivated
+                  ? null
+                  : BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromARGB(255, 22, 24, 22),
+                    ),
+              child: IconButton(
+                onPressed: _listen,
+                splashRadius: 2,
+                icon: Icon(
+                  micActivated ? Icons.mic_outlined : Icons.mic_none,
+                  size: 24,
+                  color: const Color.fromARGB(255, 138, 200, 140),
+                ),
+              ),
+            ),
 
-            // setState(() {
-            //   messages.add(ChatMessage(sender: "user", msg: _textCntrl.text));
-            //   _textCntrl.clear();
-            // });
-          },
-          splashRadius: 2,
-          icon: Icon(
-            Icons.send,
-            size: 20,
-            color: const Color.fromARGB(255, 138, 200, 140),
-          ),
+            //send message
+            ///////////////////
+            IconButton(
+              onPressed: () {
+                //adding user message o the list
+                sendMessage(msg: _textCntrl.text.trim());
+                _textCntrl.clear();
+
+                // setState(() {
+                //   messages.add(ChatMessage(sender: "user", msg: _textCntrl.text));
+                //   _textCntrl.clear();
+                // });
+              },
+              splashRadius: 2,
+              icon: Icon(
+                Icons.send,
+                size: 20,
+                color: const Color.fromARGB(255, 138, 200, 140),
+              ),
+            ),
+          ],
         ),
       ),
       style: TextStyle(
