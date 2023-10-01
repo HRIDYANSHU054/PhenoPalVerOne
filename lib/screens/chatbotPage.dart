@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:ayurbot/services/messageModel.dart';
 import 'package:ayurbot/services/userAuth.dart';
 import 'package:ayurbot/shared/profilePic.dart';
@@ -58,7 +59,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     List<dynamic> chatList = msgs['msgs'];
     //typecast into chatMessages
     messages = chatList.map((msg) {
-      return ChatMessage(sender: msg['sender'], msg: msg['msg']);
+      return ChatMessage(
+        sender: msg['sender'],
+        msg: msg['msg'],
+        doneAnimating: true,
+      );
     }).toList();
     setState(() {});
   }
@@ -89,7 +94,10 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
     required String sender,
   }) {
     // Text(widget.messages[index]['message'].text.text[0])),
-    messages.add(ChatMessage(sender: sender, msg: msg.text!.text![0]));
+    messages.add(ChatMessage(
+      sender: sender,
+      msg: msg.text!.text![0],
+    ));
   }
 
   sendMessage({required String msg}) async {
@@ -185,9 +193,9 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                     : ListView.builder(
                         physics: BouncingScrollPhysics(),
                         itemCount: messages.length,
-                        // reverse: true,
+                        reverse: true,
                         itemBuilder: (context, index) {
-                          return messages[index];
+                          return messages[messages.length - 1 - index];
                         },
                       ),
               ),
@@ -327,9 +335,11 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
 class ChatMessage extends StatefulWidget {
   String? sender;
   String? msg;
+  bool? doneAnimating;
   ChatMessage({
     required this.sender,
     required this.msg,
+    this.doneAnimating = false,
     super.key,
   });
 
@@ -381,7 +391,9 @@ class _ChatMessageState extends State<ChatMessage>
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: widget.sender == "user"
-              ? [
+              ?
+              //for user
+              [
                   //messageBox
                   /////////////////
                   Padding(
@@ -420,7 +432,9 @@ class _ChatMessageState extends State<ChatMessage>
                         : "assets/appIconChat.png",
                   ),
                 ]
-              : [
+              :
+              //for gpt
+              [
                   //sender's pic
                   /////////////////
                   profilePic(
@@ -449,29 +463,32 @@ class _ChatMessageState extends State<ChatMessage>
                               // color: Colors.orange,
                               ),
                           borderRadius: BorderRadius.all(Radius.circular(8))),
-                      // child:
-                      //  DefaultTextStyle(
-                      //   style: TextStyle(
-                      //     color: Colors.grey,
-                      //     fontSize: MediaQuery.sizeOf(context).height * 0.027,
-                      //   ),
-                      //   child:
-                      //    AnimatedTextKit(
-                      //     isRepeatingAnimation: false,
-                      //     animatedTexts: [
-                      //       TyperAnimatedText(
-                      //         msg!,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-                      child: Text(
-                        widget.msg!,
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize:
-                                MediaQuery.sizeOf(context).height * 0.027),
-                      ),
+                      child: !widget.doneAnimating!
+                          ? DefaultTextStyle(
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize:
+                                    MediaQuery.sizeOf(context).height * 0.027,
+                              ),
+                              child: AnimatedTextKit(
+                                pause: Duration(milliseconds: 100),
+                                onFinished: () {
+                                  widget.doneAnimating = true;
+                                },
+                                isRepeatingAnimation: false,
+                                animatedTexts: [
+                                  TypewriterAnimatedText(widget.msg!,
+                                      speed: Duration(milliseconds: 80)),
+                                ],
+                              ),
+                            )
+                          : Text(
+                              widget.msg!,
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: MediaQuery.sizeOf(context).height *
+                                      0.027),
+                            ),
                     ),
                   ),
                 ],

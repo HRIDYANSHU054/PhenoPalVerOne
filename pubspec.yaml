@@ -52,6 +52,7 @@ dependencies:
   dialog_flowtter:  ^0.3.3
   flutter_spinkit: ^5.2.0 
   speech_to_text: ^6.3.0
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:
